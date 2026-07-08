@@ -1,26 +1,220 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+/* ------------------------------------------------------------------
+   Nola Touch — Design System
+   Minimal-luxury beauty supply. Editorial, warm, high-contrast.
+------------------------------------------------------------------ */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand palette */
+  --gold: #fcd76b; /* bright signature gold — surfaces, CTAs, foil */
+  --gold-deep: #b8912e; /* antique gold — type on light backgrounds */
+  --gold-soft: #f6e3ad;
+  --onyx: #0b0b0c; /* near-black */
+  --charcoal: #26241f;
+  --ivory: #faf7f1; /* page background */
+  --champagne: #f3ecdf;
+  --stone: #e7e1d5;
+  --stone-line: #ddd6c8;
+  --muted: #6d685f;
+  --muted-soft: #9a9488;
+  --white: #ffffff;
+
+  /* Semantic (shadcn-compatible) */
+  --background: var(--ivory);
+  --foreground: var(--onyx);
+  --card: var(--white);
+  --card-foreground: var(--onyx);
+  --primary: var(--onyx);
+  --primary-foreground: var(--ivory);
+  --secondary: var(--champagne);
+  --secondary-foreground: var(--charcoal);
+  --accent: var(--gold);
+  --accent-foreground: var(--onyx);
+  --muted-bg: var(--champagne);
+  --border: var(--stone-line);
+  --input: var(--stone-line);
+  --ring: var(--gold-deep);
+  --radius: 0.25rem;
 }
 
 @theme inline {
+  --color-gold: var(--gold);
+  --color-gold-deep: var(--gold-deep);
+  --color-gold-soft: var(--gold-soft);
+  --color-onyx: var(--onyx);
+  --color-charcoal: var(--charcoal);
+  --color-ivory: var(--ivory);
+  --color-champagne: var(--champagne);
+  --color-stone: var(--stone);
+  --color-stone-line: var(--stone-line);
+  --color-muted: var(--muted);
+  --color-muted-soft: var(--muted-soft);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-display: var(--font-playfair);
+  --font-sans: var(--font-inter);
+
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 12px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv01";
+}
+
+::selection {
+  background: color-mix(in srgb, var(--gold) 55%, transparent);
+  color: var(--onyx);
+}
+
+/* Typographic helpers */
+.font-display {
+  font-family: var(--font-playfair), Georgia, serif;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.eyebrow {
+  font-size: 0.6875rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Wordmark treatment */
+.wordmark {
+  font-family: var(--font-playfair), Georgia, serif;
+  letter-spacing: 0.02em;
+  font-weight: 600;
+}
+
+/* Hide scrollbar for horizontal rails */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Marquee for silk-scarf style wordmark rail */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+/* Slow ambient drift for ribbon motif */
+@keyframes ribbon-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(1.5%, -1.5%, 0) rotate(0.6deg);
+  }
+}
+.animate-ribbon {
+  animation: ribbon-float 24s ease-in-out infinite;
+}
+
+/* Radix accordion */
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+.animate-accordion-down {
+  animation: accordion-down 0.3s ease-out;
+}
+.animate-accordion-up {
+  animation: accordion-up 0.3s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-ribbon {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Product surface gradients (placeholders until photography) */
+.surface-onyx {
+  background:
+    radial-gradient(120% 90% at 30% 15%, #2a2722 0%, transparent 55%),
+    linear-gradient(150deg, #131210 0%, #26241f 55%, #4a4034 100%);
+}
+.surface-champagne {
+  background:
+    radial-gradient(120% 90% at 25% 20%, #ffffff 0%, transparent 55%),
+    linear-gradient(150deg, #f3ecdf 0%, #e6d8bf 60%, #cdb58a 100%);
+}
+.surface-gold {
+  background:
+    radial-gradient(120% 90% at 30% 20%, #fff4cf 0%, transparent 55%),
+    linear-gradient(150deg, #fbe9a8 0%, #fcd76b 55%, #e0b743 100%);
+}
+.surface-stone {
+  background:
+    radial-gradient(120% 90% at 25% 20%, #ffffff 0%, transparent 55%),
+    linear-gradient(150deg, #efeadf 0%, #d9d1c2 55%, #b3a892 100%);
 }

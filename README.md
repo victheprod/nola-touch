@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nola Touch
+
+Premium digital beauty supply store for Black women — wigs, extensions, hair care, styling products, and beauty essentials.
+
+## Stack
+
+- **Next.js 16** (App Router)
+- **TypeScript**
+- **Tailwind CSS v4**
+- **shadcn/ui** primitives + **Framer Motion** + **Lucide Icons**
+- **Playfair Display** (serif headings) + **Inter** (body) via `next/font`
+
+## Brand Colors
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| Gold | `#FCD76B` | Primary brand, CTAs |
+| Black | `#0A0A0A` | Secondary, hero/footer |
+| Ivory | `#FAF7F2` | Page background |
+| Champagne | `#F5EFE6` | Section backgrounds |
+| Stone | `#E8E4DE` | Borders, dividers |
+| Charcoal | `#2B2B2B` | Body text accent |
 
 ## Getting Started
 
-First, run the development server:
+Requires **Node.js 18.18+** (Node 20+ recommended).
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project uses **no environment variables** — it runs entirely on static
+content and requires no secrets, API keys, or external services to build or run.
+See `.env.example` (empty by design). If you later add integrations (payments,
+CMS, analytics), document their keys there and set them in the Vercel dashboard.
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/                  # Next.js App Router pages
+│   ├── globals.css       # Design tokens & Tailwind theme
+│   ├── layout.tsx        # Root layout with fonts, header, footer
+│   └── page.tsx          # Homepage
+├── components/
+│   ├── home/             # Homepage sections
+│   ├── layout/           # Header, footer, mobile menu
+│   └── ui/               # Reusable UI (Button, ProductCard, etc.)
+├── data/                 # Product, category, review data
+└── lib/                  # Utilities
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Homepage Sections
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Hero — headline, CTAs, trust indicators
+2. Featured Categories — 6 shop categories
+3. Best Sellers — top products grid
+4. New Arrivals — latest products
+5. Brand Promise — why shop with Nola Touch
+6. Product Education — hair guides
+7. Customer Reviews — verified testimonials
+8. Newsletter — email signup
+9. Footer — shop links, help, social
 
-## Deploy on Vercel
+## Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start dev server |
+| `npm run build` | Production build |
+| `npm run start` | Serve production build |
+| `npm run lint` | ESLint |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment (Vercel)
+
+This project is a standard Next.js app and deploys to Vercel with zero extra
+configuration.
+
+1. Push the repository to GitHub.
+2. In [Vercel](https://vercel.com/new), import the GitHub repo.
+3. Vercel auto-detects the settings below — no changes needed:
+
+| Setting | Value |
+|---------|-------|
+| Framework Preset | Next.js |
+| Install Command | `npm install` |
+| Build Command | `npm run build` |
+| Output Directory | (default — managed by Next.js) |
+| Environment Variables | none required |
+
+4. Click **Deploy**. Every push to the default branch ships to production, and
+   pull requests get automatic preview deployments.
+
+To build and run the production server locally:
+
+```bash
+npm run build
+npm run start
+```
