@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { Ribbon } from "@/components/brand/ribbon";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { CollectionCard } from "@/components/shop/collection-card";
 import { RevealGroup, RevealItem } from "@/components/motion/reveal";
@@ -10,10 +11,13 @@ export function FeaturedCollections() {
 
   return (
     <section
-      className="bg-onyx py-16 text-ivory sm:py-24"
+      className="relative bg-onyx pb-16 pt-6 text-ivory sm:pb-24 sm:pt-10"
       aria-labelledby="collections-heading"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <Ribbon tone="ivory" animated={false} className="opacity-[0.22]" />
+      <div className="story-glow-gold pointer-events-none absolute inset-x-0 top-0 h-48" aria-hidden />
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-end">
           <SectionHeading
             eyebrow="Shop by category"
@@ -31,9 +35,12 @@ export function FeaturedCollections() {
           </Link>
         </div>
 
-        <RevealGroup className="mt-8 grid grid-cols-2 gap-2.5 sm:mt-10 sm:gap-3 md:grid-cols-5">
-          {featured.map((c) => (
-            <RevealItem key={c.slug}>
+        <RevealGroup className="-mt-2 grid grid-cols-2 gap-2.5 sm:mt-2 sm:gap-3 md:grid-cols-5">
+          {featured.map((c, i) => (
+            <RevealItem
+              key={c.slug}
+              className={i === 0 ? "md:-mt-6 lg:-mt-10" : undefined}
+            >
               <CollectionCard collection={c} variant="photo" className="h-full" />
             </RevealItem>
           ))}

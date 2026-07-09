@@ -43,12 +43,13 @@ export function ReviewsSection() {
 
   return (
     <section
-      className="bg-ivory py-16 text-onyx sm:py-24"
+      className="relative bg-ivory pb-16 pt-12 text-onyx sm:pb-24 sm:pt-16"
       aria-labelledby="reviews-heading"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="story-glow-ivory pointer-events-none absolute inset-x-0 top-0 h-32" aria-hidden />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal className="flex flex-col items-center gap-3 text-center">
           <SectionHeading
             eyebrow="Customer reviews"

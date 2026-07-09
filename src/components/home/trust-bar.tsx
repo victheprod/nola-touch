@@ -27,7 +27,7 @@ function TrustMetric({
   return (
     <div
       ref={ref}
-      className="group flex flex-col items-center justify-center gap-2 bg-champagne px-4 py-5 transition-colors hover:bg-ivory sm:py-6"
+      className="group flex flex-col items-center justify-center gap-2 px-4 py-5 transition-colors hover:bg-ivory/60 sm:py-6"
     >
       <span className="glass-chip flex h-9 w-9 items-center justify-center">
         <Icon className="h-3.5 w-3.5 text-gold-deep" strokeWidth={1.75} />
@@ -49,13 +49,17 @@ function TrustMetric({
 export function TrustBar() {
   return (
     <section
-      className="border-y border-stone-line bg-champagne"
+      className="relative z-20 -mt-20 sm:-mt-28"
       aria-label="Store guarantees"
     >
-      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-px bg-stone-line sm:grid-cols-4">
-        {items.map((item) => (
-          <TrustMetric key={item.label} {...item} />
-        ))}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="overflow-hidden border border-stone-line/70 bg-champagne/92 shadow-[0_28px_80px_rgba(0,0,0,0.22)] backdrop-blur-md">
+          <div className="grid grid-cols-2 gap-px bg-stone-line/80 sm:grid-cols-4">
+            {items.map((item) => (
+              <TrustMetric key={item.label} {...item} />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

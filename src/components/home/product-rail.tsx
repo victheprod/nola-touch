@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/data/catalog";
+import { Ribbon } from "@/components/brand/ribbon";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ProductCard } from "@/components/shop/product-card";
 import { RevealGroup, RevealItem } from "@/components/motion/reveal";
@@ -14,6 +15,7 @@ export function ProductRail({
   viewAllHref,
   tone = "light",
   className,
+  flow = "default",
 }: {
   eyebrow?: string;
   title: string;
@@ -22,19 +24,30 @@ export function ProductRail({
   viewAllHref: string;
   tone?: "light" | "dark";
   className?: string;
+  /** `continue` = same-tone chapter with less top padding; `lift` = cards overlap the seam above */
+  flow?: "default" | "continue" | "lift";
 }) {
   const dark = tone === "dark";
 
   return (
     <section
       className={cn(
-        "py-16 sm:py-24",
+        "relative",
+        flow === "continue" ? "pb-16 pt-4 sm:pb-20 sm:pt-6" : "py-16 sm:py-24",
+        flow === "lift" && "pb-16 pt-8 sm:pb-24 sm:pt-12",
         dark ? "bg-[#0D0D0D]" : "bg-ivory",
         className,
       )}
       aria-label={title}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {dark && flow !== "continue" && (
+        <Ribbon tone="ivory" animated={false} className="opacity-[0.18]" />
+      )}
+      {!dark && (
+        <div className="story-glow-ivory pointer-events-none absolute inset-x-0 top-0 h-40" aria-hidden />
+      )}
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-end">
           <SectionHeading
             eyebrow={eyebrow}
@@ -54,7 +67,13 @@ export function ProductRail({
           </Link>
         </div>
 
-        <RevealGroup className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-4 lg:grid-cols-4">
+        <RevealGroup
+          className={cn(
+            "grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4",
+            flow === "lift" ? "mt-6 sm:mt-8" : "mt-8 sm:mt-10",
+            flow === "lift" && "-mt-4 sm:-mt-8",
+          )}
+        >
           {products.slice(0, 4).map((p) => (
             <RevealItem key={p.slug}>
               <ProductCard product={p} tone={tone} />

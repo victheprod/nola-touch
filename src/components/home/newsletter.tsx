@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Ribbon } from "@/components/brand/ribbon";
 import { Reveal } from "@/components/motion/reveal";
 import { easeLux } from "@/lib/motion";
 
@@ -17,8 +18,11 @@ export function Newsletter() {
   }
 
   return (
-    <section className="border-t border-stone-line bg-onyx py-16 text-ivory sm:py-20">
-      <Reveal className="mx-auto max-w-2xl px-4 text-center sm:px-6">
+    <section className="relative overflow-hidden bg-onyx pb-20 pt-14 text-ivory sm:pb-24 sm:pt-20">
+      <Ribbon tone="gold" animated={false} className="opacity-[0.2]" />
+      <div className="story-glow-gold pointer-events-none absolute inset-x-0 top-0 h-56" aria-hidden />
+
+      <Reveal className="relative mx-auto max-w-2xl px-4 text-center sm:px-6">
         <p className="eyebrow text-gold">Restock alerts</p>
         <h2 className="mt-3 font-display text-3xl leading-tight tracking-tight sm:text-4xl">
           Get new wigs &amp; bundles first

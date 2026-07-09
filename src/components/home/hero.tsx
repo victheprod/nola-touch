@@ -84,6 +84,12 @@ export function Hero() {
           </motion.div>
         </motion.div>
       </motion.div>
+
+      {/* Bleed into trust band — no hard seam */}
+      <div
+        className="story-hero-fade pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-40 sm:h-52"
+        aria-hidden="true"
+      />
     </section>
   );
 }

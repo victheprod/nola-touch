@@ -7,16 +7,20 @@ import { cn } from "@/lib/utils";
 export function EditorialDivider({
   className,
   tone = "champagne",
+  variant = "default",
 }: {
   className?: string;
   tone?: "champagne" | "onyx" | "ivory";
+  variant?: "default" | "ghost";
 }) {
   const bg =
-    tone === "onyx"
-      ? "bg-onyx"
-      : tone === "ivory"
-        ? "bg-ivory"
-        : "bg-champagne";
+    variant === "ghost"
+      ? "bg-transparent"
+      : tone === "onyx"
+        ? "bg-onyx"
+        : tone === "ivory"
+          ? "bg-ivory"
+          : "bg-champagne";
 
   const text =
     tone === "onyx" ? "text-ivory/35" : "text-onyx/30";
@@ -25,7 +29,12 @@ export function EditorialDivider({
 
   return (
     <div
-      className={cn("marquee-fade overflow-hidden border-y border-stone-line/60 py-3.5", bg, className)}
+      className={cn(
+        "marquee-fade overflow-hidden py-3.5",
+        variant === "default" && "border-y border-stone-line/60",
+        bg,
+        className,
+      )}
       aria-hidden="true"
     >
       <div className={cn("flex w-max", text)}>

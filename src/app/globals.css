@@ -264,6 +264,97 @@ body {
   );
 }
 
+/* ------------------------------------------------------------------
+   Homepage story flow — seamless section transitions
+------------------------------------------------------------------ */
+.home-story {
+  --story-onyx: #0b0b0c;
+  --story-dark: #0d0d0d;
+  --story-champagne: #f3ecdf;
+  --story-ivory: #faf7f1;
+}
+
+.story-bridge {
+  pointer-events: none;
+}
+
+.story-gradient-onyx-champagne {
+  background: linear-gradient(
+    180deg,
+    var(--story-onyx) 0%,
+    #1a1714 35%,
+    var(--story-champagne) 100%
+  );
+}
+.story-gradient-champagne-onyx {
+  background: linear-gradient(
+    180deg,
+    var(--story-champagne) 0%,
+    #4a4034 42%,
+    var(--story-onyx) 78%,
+    var(--story-onyx) 100%
+  );
+}
+.story-gradient-dark-ivory {
+  background: linear-gradient(
+    180deg,
+    var(--story-dark) 0%,
+    #1c1916 38%,
+    #e8e2d6 72%,
+    var(--story-ivory) 100%
+  );
+}
+.story-gradient-ivory-champagne {
+  background: linear-gradient(
+    180deg,
+    var(--story-ivory) 0%,
+    #efe8dc 55%,
+    var(--story-champagne) 100%
+  );
+}
+.story-gradient-champagne-ivory {
+  background: linear-gradient(
+    180deg,
+    var(--story-champagne) 0%,
+    #f7f3eb 60%,
+    var(--story-ivory) 100%
+  );
+}
+.story-gradient-ivory-onyx {
+  background: linear-gradient(
+    180deg,
+    var(--story-ivory) 0%,
+    #c9bfb0 38%,
+    #2a2620 68%,
+    var(--story-onyx) 100%
+  );
+}
+
+.story-hero-fade {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(243, 236, 223, 0.15) 45%,
+    var(--story-champagne) 100%
+  );
+}
+
+.story-glow-gold {
+  background: radial-gradient(
+    ellipse 70% 55% at 50% 0%,
+    rgba(252, 215, 107, 0.14) 0%,
+    transparent 70%
+  );
+}
+
+.story-glow-ivory {
+  background: radial-gradient(
+    ellipse 80% 50% at 50% 100%,
+    rgba(250, 247, 241, 0.12) 0%,
+    transparent 65%
+  );
+}
+
 /* Product surface gradients (placeholders until photography) */
 .surface-onyx {
   background:
