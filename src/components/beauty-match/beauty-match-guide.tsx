@@ -2,7 +2,8 @@
 
 import { useCallback, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, Sparkles } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
+import { GuideTrigger } from "@/components/beauty-match/guide-trigger";
 import { GuideShell } from "@/components/beauty-match/guide-shell";
 import { GuideIntro } from "@/components/beauty-match/guide-intro";
 import { GuideLoading } from "@/components/beauty-match/guide-loading";
@@ -14,7 +15,6 @@ import { EMPTY_ANSWERS, type BeautyMatchAnswers, type BeautyMatchRecommendation 
 import { buildRecommendation } from "@/lib/beauty-match/recommend";
 import { easeLux, fadeUp } from "@/lib/motion";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 type Phase = "intro" | "questions" | "loading" | "reveal" | "results";
 
@@ -76,32 +76,8 @@ export function BeautyMatchGuide() {
 
   return (
     <>
-      {/* Sparkle concierge — bottom left per brand mockup */}
       <AnimatePresence>
-        {!open && (
-          <motion.button
-            type="button"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.45, ease: easeLux }}
-            onClick={() => setOpen(true)}
-            className={cn(
-              "fixed z-[35] flex h-14 w-14 items-center justify-center rounded-full",
-              "border border-gold/40 bg-onyx shadow-[0_8px_32px_rgba(0,0,0,0.35)]",
-              "bottom-[max(1.25rem,env(safe-area-inset-bottom))] left-4",
-              "transition-transform hover:scale-105 cursor-pointer",
-              "max-sm:bottom-[max(5.5rem,env(safe-area-inset-bottom))]",
-            )}
-            aria-label="Open Beauty Match Guide"
-          >
-            <Sparkles className="h-5 w-5 text-gold" strokeWidth={1.5} />
-            <span className="absolute -right-0.5 -top-0.5 flex h-3 w-3">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-40" />
-              <span className="relative inline-flex h-3 w-3 rounded-full bg-gold" />
-            </span>
-          </motion.button>
-        )}
+        {!open && <GuideTrigger onOpen={() => setOpen(true)} />}
       </AnimatePresence>
 
       <GuideShell
