@@ -9,11 +9,17 @@ type BrandLogoProps = {
   href?: string | null;
 };
 
-/** Icon mark — dark header, ivory on onyx. */
+/** Icon mark — gold on dark surfaces, scales cleanly at any size. */
 export function BrandIcon({ className, href = "/" }: BrandLogoProps) {
   const mark = (
-    <LogoMark className={cn("h-9 w-9 text-ivory sm:h-10 sm:w-10", className)} />
+    <LogoMark
+      className={cn(
+        "h-9 w-9 text-gold transition-[filter,transform] duration-300 hover:drop-shadow-[0_0_12px_rgba(252,215,107,0.45)] sm:h-10 sm:w-10",
+        className,
+      )}
+    />
   );
+
   if (href === null) return mark;
   return (
     <Link href={href} aria-label="Nola Touch — home" className="inline-flex shrink-0">
@@ -22,18 +28,31 @@ export function BrandIcon({ className, href = "/" }: BrandLogoProps) {
   );
 }
 
-/** Horizontal lockup — light surfaces (mobile menu, etc.). */
-export function BrandPrimary({ className, href = "/" }: BrandLogoProps) {
-  return <PrimaryLogo variant="onyx" href={href} className={className} />;
+/** Horizontal lockup — traced NOLA wordmark + TOUCH. */
+export function BrandPrimary({
+  className,
+  href = "/",
+  variant = "onyx",
+}: BrandLogoProps & { variant?: "onyx" | "ivory" | "gold" }) {
+  return <PrimaryLogo href={href} variant={variant} className={className} />;
 }
 
-/** Stacked lockup — dark footer, gold wordmark. */
-export function BrandStacked({ className, href = "/" }: BrandLogoProps) {
-  const stacked = <StackedLogo variant="gold" size="md" className={className} />;
-  if (href === null) return stacked;
+/** Stacked lockup — footer and brand moments on dark backgrounds. */
+export function BrandStacked({
+  className,
+  href = "/",
+  variant = "gold",
+  size = "md",
+}: BrandLogoProps & {
+  variant?: "onyx" | "ivory" | "gold";
+  size?: "sm" | "md" | "lg";
+}) {
+  const logo = <StackedLogo variant={variant} size={size} className={className} />;
+
+  if (href === null) return logo;
   return (
     <Link href={href} aria-label="Nola Touch — home" className="inline-flex">
-      {stacked}
+      {logo}
     </Link>
   );
 }

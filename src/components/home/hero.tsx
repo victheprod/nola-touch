@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LogoMark } from "@/components/brand/logo";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { useMounted } from "@/lib/use-mounted";
 import { heroImage } from "@/data/images";
@@ -20,11 +21,20 @@ export function Hero() {
           alt={heroImage.alt}
           fill
           priority
-          className="object-cover object-[center_20%] opacity-[0.68] sm:object-center"
+          className="object-cover object-[center_20%] opacity-[0.72] sm:object-center"
           sizes="100vw"
         />
         <div className="hero-overlay absolute inset-0" />
+        <div
+          className="pointer-events-none absolute -left-1/4 top-1/3 h-[28rem] w-[28rem] rounded-full bg-gold/10 blur-3xl"
+          aria-hidden="true"
+        />
       </div>
+
+      <LogoMark
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-8 top-16 h-48 w-48 text-gold/[0.06] sm:-right-4 sm:top-20 sm:h-64 sm:w-64 lg:h-80 lg:w-80"
+      />
 
       <div className="relative z-10 mx-auto flex min-h-[85vh] max-w-7xl flex-col justify-center px-4 py-20 sm:min-h-[88vh] sm:px-6 sm:py-24 lg:px-8">
         <motion.div
@@ -33,9 +43,10 @@ export function Hero() {
           animate="visible"
           className="max-w-xl lg:max-w-2xl"
         >
-          <motion.p variants={fadeUp} className="eyebrow text-gold">
-            Beauty Supply · New Orleans
-          </motion.p>
+          <motion.div variants={fadeUp} className="flex items-center gap-3">
+            <span className="h-px w-8 bg-gold" aria-hidden="true" />
+            <p className="eyebrow text-gold">Beauty Supply · New Orleans</p>
+          </motion.div>
 
           <motion.h1
             variants={fadeUp}

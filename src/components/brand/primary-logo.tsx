@@ -12,7 +12,7 @@ const NOLA_PATH =
 
 type PrimaryLogoProps = {
   className?: string;
-  variant?: "onyx" | "ivory";
+  variant?: "onyx" | "ivory" | "gold";
   href?: string | null;
 };
 
@@ -26,7 +26,12 @@ export function PrimaryLogo({
   variant = "onyx",
   href = "/",
 }: PrimaryLogoProps) {
-  const color = variant === "ivory" ? "text-ivory" : "text-onyx";
+  const color =
+    variant === "ivory"
+      ? "text-ivory"
+      : variant === "gold"
+        ? "text-gold"
+        : "text-onyx";
 
   const content = (
     <span

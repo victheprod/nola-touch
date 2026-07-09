@@ -50,7 +50,7 @@ export function ProductCard({
 
   return (
     <article className={cn("product-card group flex flex-col", className)}>
-      <div className="relative overflow-hidden bg-[#111]">
+      <div className="relative overflow-hidden bg-[#111] ring-1 ring-transparent transition-[box-shadow,ring-color] duration-300 group-hover:shadow-[0_20px_48px_rgba(0,0,0,0.22)] group-hover:ring-gold/25">
         <Link href={`/products/${product.slug}`} className="relative block">
           {image ? (
             <div className="relative aspect-[3/4] overflow-hidden">

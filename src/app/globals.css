@@ -189,11 +189,13 @@ body {
 
 /* Figma-aligned editorial overlays */
 .hero-overlay {
-  background: linear-gradient(
-    108deg,
-    rgba(9, 9, 10, 0.88) 38%,
-    rgba(9, 9, 10, 0.25) 100%
-  );
+  background:
+    radial-gradient(ellipse 55% 45% at 12% 62%, rgba(252, 215, 107, 0.12) 0%, transparent 70%),
+    linear-gradient(
+      108deg,
+      rgba(9, 9, 10, 0.9) 36%,
+      rgba(9, 9, 10, 0.28) 100%
+    );
 }
 .card-overlay {
   background: linear-gradient(

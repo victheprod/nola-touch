@@ -17,9 +17,11 @@ export function TrustBar() {
         {items.map(({ Icon, label }) => (
           <div
             key={label}
-            className="flex items-center justify-center gap-2.5 bg-champagne px-4 py-4 sm:py-5"
+            className="group flex items-center justify-center gap-3 bg-champagne px-4 py-4 transition-colors hover:bg-ivory sm:py-5"
           >
-            <Icon className="h-4 w-4 shrink-0 text-gold-deep" strokeWidth={1.5} />
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-gold/30 bg-ivory/60 transition-colors group-hover:border-gold/60 group-hover:bg-gold/10">
+              <Icon className="h-3.5 w-3.5 text-gold-deep" strokeWidth={1.75} />
+            </span>
             <span className="text-[0.7rem] font-medium uppercase tracking-[0.1em] text-charcoal sm:text-xs">
               {label}
             </span>

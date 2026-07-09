@@ -38,7 +38,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-4">
-            <BrandStacked />
+            <BrandStacked variant="gold" size="md" />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-stone">
               Wigs, bundles, hair care, styling products, and accessories for
               Black women — shipped fast from New Orleans.
