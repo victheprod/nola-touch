@@ -397,28 +397,46 @@ body {
   border-bottom-color: var(--gold);
 }
 
-/* Beauty Match Guide — floating trigger seal */
-.match-guide-aura {
-  inset: -6px;
-  border: 1px solid rgba(252, 215, 107, 0.35);
-  animation: match-guide-pulse 2.8s ease-in-out infinite;
+/* Beauty Match Guide — charm pendant trigger */
+.match-guide-medallion-ring {
+  inset: -5px;
+  border: 1px solid rgba(252, 215, 107, 0.3);
+  animation: match-guide-pulse 3s ease-in-out infinite;
 }
-.match-guide-aura-delay {
-  inset: -12px;
-  border-color: rgba(252, 215, 107, 0.15);
-  animation: match-guide-pulse 2.8s ease-in-out infinite 0.6s;
+.match-guide-medallion-ring-delay {
+  inset: -10px;
+  border-color: rgba(252, 215, 107, 0.12);
+  animation: match-guide-pulse 3s ease-in-out infinite 0.5s;
 }
-.match-guide-pill {
+.match-guide-silk-banner {
   position: relative;
+  background: linear-gradient(135deg, rgba(38, 36, 31, 0.95), rgba(10, 10, 11, 0.98));
+  border: 1px solid rgba(252, 215, 107, 0.35);
+  border-radius: 999px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
-.match-guide-pill::before {
+.match-guide-silk-banner::after {
   content: "";
   position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: linear-gradient(135deg, rgba(252, 215, 107, 0.2), transparent 50%, rgba(252, 215, 107, 0.08));
-  pointer-events: none;
-  z-index: -1;
+  left: 50%;
+  bottom: -5px;
+  transform: translateX(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background: rgba(10, 10, 11, 0.98);
+  border-right: 1px solid rgba(252, 215, 107, 0.35);
+  border-bottom: 1px solid rgba(252, 215, 107, 0.35);
+}
+.match-guide-ribbon-tail {
+  border-radius: 2px 2px 0 0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+.match-guide-ribbon-notch {
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+  margin-top: -1px;
+}
+.match-guide-chain {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
 }
 @keyframes match-guide-pulse {
   0%,
