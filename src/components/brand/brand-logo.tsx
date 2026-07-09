@@ -1,20 +1,20 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { LogoMark } from "@/components/brand/logo";
-import { PrimaryLogo } from "@/components/brand/primary-logo";
-import { StackedLogo } from "@/components/brand/stacked-logo";
+import { BrandMark } from "@/components/brand/brand-mark";
 
 type BrandLogoProps = {
   className?: string;
   href?: string | null;
 };
 
-/** Icon mark — gold on dark surfaces, scales cleanly at any size. */
+/** Icon mark — gold ribbon N on dark header. */
 export function BrandIcon({ className, href = "/" }: BrandLogoProps) {
   const mark = (
-    <LogoMark
+    <BrandMark
+      asset="icon"
+      variant="gold"
       className={cn(
-        "h-9 w-9 text-gold transition-[filter,transform] duration-300 hover:drop-shadow-[0_0_12px_rgba(252,215,107,0.45)] sm:h-10 sm:w-10",
+        "h-9 w-9 transition-[filter] duration-300 hover:drop-shadow-[0_0_14px_rgba(252,215,107,0.5)] sm:h-10 sm:w-10",
         className,
       )}
     />
@@ -28,16 +28,29 @@ export function BrandIcon({ className, href = "/" }: BrandLogoProps) {
   );
 }
 
-/** Horizontal lockup — traced NOLA wordmark + TOUCH. */
+/** Horizontal lockup from client artwork. */
 export function BrandPrimary({
   className,
   href = "/",
   variant = "onyx",
 }: BrandLogoProps & { variant?: "onyx" | "ivory" | "gold" }) {
-  return <PrimaryLogo href={href} variant={variant} className={className} />;
+  const logo = (
+    <BrandMark
+      asset="primary"
+      variant={variant}
+      className={cn("h-7 w-[8.75rem] sm:h-8 sm:w-[10rem]", className)}
+    />
+  );
+
+  if (href === null) return logo;
+  return (
+    <Link href={href} aria-label="Nola Touch — home" className="inline-flex">
+      {logo}
+    </Link>
+  );
 }
 
-/** Stacked lockup — footer and brand moments on dark backgrounds. */
+/** Stacked lockup from client artwork — footer, brand moments. */
 export function BrandStacked({
   className,
   href = "/",
@@ -47,7 +60,20 @@ export function BrandStacked({
   variant?: "onyx" | "ivory" | "gold";
   size?: "sm" | "md" | "lg";
 }) {
-  const logo = <StackedLogo variant={variant} size={size} className={className} />;
+  const scale =
+    size === "sm"
+      ? "h-12 w-[7.25rem]"
+      : size === "lg"
+        ? "h-[4.75rem] w-[7.35rem]"
+        : "h-14 w-[8.5rem]";
+
+  const logo = (
+    <BrandMark
+      asset="stacked"
+      variant={variant}
+      className={cn(scale, className)}
+    />
+  );
 
   if (href === null) return logo;
   return (

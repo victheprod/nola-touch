@@ -8,7 +8,7 @@ export default function NotFound() {
     <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-onyx px-4 text-center text-ivory">
       <Ribbon tone="gold" className="opacity-80" />
       <div className="relative">
-        <LogoMark className="mx-auto h-12 w-12 text-gold" />
+        <LogoMark variant="gold" className="mx-auto h-12 w-12" />
         <p className="eyebrow mt-8 text-gold">Error 404</p>
         <h1 className="mt-4 font-display text-4xl tracking-tight sm:text-5xl">
           This page slipped away

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { LogoMark } from "@/components/brand/logo";
+import { BrandMark } from "@/components/brand/brand-mark";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { useMounted } from "@/lib/use-mounted";
 import { heroImage } from "@/data/images";
@@ -31,9 +31,10 @@ export function Hero() {
         />
       </div>
 
-      <LogoMark
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-8 top-16 h-48 w-48 text-gold/[0.06] sm:-right-4 sm:top-20 sm:h-64 sm:w-64 lg:h-80 lg:w-80"
+      <BrandMark
+        asset="icon"
+        variant="gold"
+        className="pointer-events-none absolute -right-6 top-14 h-44 w-44 opacity-[0.08] sm:top-16 sm:h-56 sm:w-56 lg:h-72 lg:w-72"
       />
 
       <div className="relative z-10 mx-auto flex min-h-[85vh] max-w-7xl flex-col justify-center px-4 py-20 sm:min-h-[88vh] sm:px-6 sm:py-24 lg:px-8">

@@ -49,9 +49,10 @@ export function ProductSurface({
         />
       </svg>
       <LogoMark
+        variant={light ? "onyx" : "gold"}
         className={cn(
-          "absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2",
-          light ? "text-onyx/25" : "text-gold/40",
+          "absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 opacity-25",
+          !light && "opacity-40",
           markClassName,
         )}
       />
