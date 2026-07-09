@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { Plus } from "lucide-react";
+import Image from "next/image";
 import { cn, formatPrice } from "@/lib/utils";
 import type { Product } from "@/data/catalog";
+import { productImages } from "@/data/images";
 import { useCart } from "@/lib/cart/cart-context";
 import { Badge } from "@/components/ui/badge";
 import { StarRating } from "@/components/ui/star-rating";
@@ -19,11 +20,15 @@ const badgeVariant = {
 export function ProductCard({
   product,
   className,
+  tone = "light",
 }: {
   product: Product;
   className?: string;
+  tone?: "light" | "dark";
 }) {
   const { addItem } = useCart();
+  const dark = tone === "dark";
+  const image = productImages[product.slug];
 
   function quickAdd(e: React.MouseEvent) {
     e.preventDefault();
@@ -37,15 +42,27 @@ export function ProductCard({
   }
 
   return (
-    <article className={cn("group flex flex-col", className)}>
+    <article className={cn("product-card group flex flex-col", className)}>
       <Link
         href={`/products/${product.slug}`}
-        className="relative block overflow-hidden"
+        className="relative block overflow-hidden bg-[#111]"
       >
-        <ProductSurface
-          surface={product.surface}
-          className="aspect-[4/5] transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-        />
+        {image ? (
+          <div className="relative aspect-[3/4] overflow-hidden">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              sizes="(max-width: 640px) 72vw, 25vw"
+            />
+          </div>
+        ) : (
+          <ProductSurface
+            surface={product.surface}
+            className="aspect-[3/4] transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+          />
+        )}
 
         {product.badge && (
           <Badge
@@ -62,23 +79,29 @@ export function ProductCard({
           </Badge>
         )}
 
-        {/* Quick add */}
         <button
           type="button"
           onClick={quickAdd}
           aria-label={`Add ${product.name} to cart`}
-          className="absolute bottom-3 right-3 z-10 flex h-11 w-11 translate-y-2 items-center justify-center bg-ivory text-onyx opacity-0 shadow-lg transition-all duration-300 ease-out hover:bg-gold group-hover:translate-y-0 group-hover:opacity-100 focus-visible:translate-y-0 focus-visible:opacity-100 cursor-pointer"
+          className="product-cta absolute bottom-0 left-0 right-0 z-10 bg-gold py-3.5 text-[0.625rem] font-semibold uppercase tracking-[0.22em] text-onyx transition-colors hover:bg-ivory cursor-pointer"
         >
-          <Plus className="h-5 w-5" strokeWidth={1.5} />
+          Add to bag
         </button>
       </Link>
 
       <div className="flex flex-1 flex-col pt-4">
-        <p className="eyebrow text-muted-soft">{product.collectionName}</p>
+        <p className={cn("eyebrow", dark ? "text-muted-soft" : "text-muted-soft")}>
+          {product.collectionName}
+        </p>
         <h3 className="mt-2">
           <Link
             href={`/products/${product.slug}`}
-            className="font-display text-[1.15rem] leading-snug tracking-tight text-onyx transition-colors group-hover:text-gold-deep"
+            className={cn(
+              "font-display text-[1.05rem] leading-snug tracking-tight transition-colors sm:text-[1.1rem]",
+              dark
+                ? "text-ivory hover:text-gold"
+                : "text-onyx hover:text-gold-deep",
+            )}
           >
             {product.name}
           </Link>
@@ -86,11 +109,18 @@ export function ProductCard({
 
         <div className="mt-2 flex items-center gap-2">
           <StarRating rating={product.rating} size={13} />
-          <span className="text-xs text-muted">({product.reviewCount})</span>
+          <span className={cn("text-xs", dark ? "text-stone" : "text-muted")}>
+            ({product.reviewCount})
+          </span>
         </div>
 
         <div className="mt-auto flex items-baseline gap-2 pt-3">
-          <span className="text-[0.95rem] font-semibold text-onyx">
+          <span
+            className={cn(
+              "font-display text-[1.05rem] italic",
+              dark ? "text-gold" : "text-onyx",
+            )}
+          >
             {formatPrice(product.price)}
           </span>
           {product.compareAt && (

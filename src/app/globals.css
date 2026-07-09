@@ -187,10 +187,37 @@ body {
   animation: accordion-up 0.3s ease-out;
 }
 
+/* Figma-aligned editorial overlays */
+.hero-overlay {
+  background: linear-gradient(
+    108deg,
+    rgba(9, 9, 10, 0.88) 38%,
+    rgba(9, 9, 10, 0.25) 100%
+  );
+}
+.card-overlay {
+  background: linear-gradient(
+    to bottom,
+    transparent 35%,
+    rgba(9, 9, 10, 0.92) 100%
+  );
+}
+.product-cta {
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.product-card:hover .product-cta,
+.product-card:focus-within .product-cta {
+  transform: translateY(0);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
   .animate-ribbon {
     animation: none;
+  }
+  .product-cta {
+    transform: translateY(0);
   }
   html {
     scroll-behavior: auto;

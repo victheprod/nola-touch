@@ -6,32 +6,35 @@ import { RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { collections } from "@/data/catalog";
 
 export function FeaturedCollections() {
+  const featured = collections.slice(0, 5);
+
   return (
-    <section className="py-20 sm:py-28" aria-labelledby="collections-heading">
+    <section
+      className="bg-onyx py-20 text-ivory sm:py-28"
+      aria-labelledby="collections-heading"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <SectionHeading
-            eyebrow="Shop by Collection"
-            title="Find exactly what you need"
-            description="Six focused collections, so you get straight to the right products — no endless scrolling."
+            eyebrow="Shop by Category"
+            title="Find what you need"
+            description="Five focused collections — straight to the right products, no endless scrolling."
             id="collections-heading"
+            tone="dark"
           />
           <Link
             href="/shop"
-            className="group inline-flex shrink-0 items-center gap-2 text-sm font-medium uppercase tracking-[0.12em] text-onyx"
+            className="group inline-flex shrink-0 items-center gap-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-stone transition-colors hover:text-ivory"
           >
-            View all
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            All categories
+            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
 
-        <RevealGroup className="mt-12 grid grid-cols-2 gap-4 lg:grid-cols-4 lg:grid-rows-2">
-          <RevealItem className="col-span-2 row-span-2 lg:col-span-2">
-            <CollectionCard collection={collections[0]} className="h-full min-h-[22rem]" />
-          </RevealItem>
-          {collections.slice(1, 5).map((c) => (
-            <RevealItem key={c.slug} className="col-span-1">
-              <CollectionCard collection={c} className="h-full min-h-[15rem]" />
+        <RevealGroup className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-5">
+          {featured.map((c) => (
+            <RevealItem key={c.slug}>
+              <CollectionCard collection={c} variant="photo" className="h-full" />
             </RevealItem>
           ))}
         </RevealGroup>

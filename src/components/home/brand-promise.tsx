@@ -1,55 +1,44 @@
-import { HeartHandshake, BadgeCheck, Truck, MessagesSquare } from "lucide-react";
-import { SectionHeading } from "@/components/ui/section-heading";
+import { ShieldCheck, Truck, RefreshCw } from "lucide-react";
 import { RevealGroup, RevealItem } from "@/components/motion/reveal";
 
 const promises = [
   {
-    Icon: HeartHandshake,
-    title: "Curated for Black women",
-    body: "Every product is selected with textured hair, protective styles, and real routines in mind — not a generic catalog.",
-  },
-  {
-    Icon: BadgeCheck,
-    title: "Quality you can trust",
-    body: "We stock the brands stylists actually use, from salon-grade hair to the drugstore staples that perform.",
+    Icon: ShieldCheck,
+    title: "Quality guarantee",
+    body: "Every product is vetted for quality. If it's not right, we make it right — no questions asked.",
   },
   {
     Icon: Truck,
-    title: "Fast, reliable shipping",
-    body: "Orders ship in 1–2 business days with tracking. Free shipping on orders over $75.",
+    title: "Ships in 1–3 days",
+    body: "Fast, reliable shipping on every order. Free shipping on purchases over $75.",
   },
   {
-    Icon: MessagesSquare,
-    title: "Real human support",
-    body: "Questions about texture, length, or install? Our team replies within 24 hours — no bots.",
+    Icon: RefreshCw,
+    title: "Easy returns",
+    body: "30-day hassle-free returns on eligible items. Your satisfaction is non-negotiable.",
   },
 ];
 
 export function BrandPromise() {
   return (
-    <section className="border-y border-border bg-champagne py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          eyebrow="Why Nola Touch"
-          title="Built for how you actually shop for hair"
-          description="We're not a faceless marketplace. Here's what you can count on with every order."
-          align="center"
-          className="mx-auto"
-        />
-
-        <RevealGroup className="mt-14 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-          {promises.map(({ Icon, title, body }) => (
-            <RevealItem
-              key={title}
-              className="flex flex-col bg-ivory p-8"
-            >
-              <Icon className="h-6 w-6 text-gold-deep" strokeWidth={1.25} />
-              <h3 className="mt-5 font-display text-xl text-onyx">{title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted">{body}</p>
-            </RevealItem>
-          ))}
-        </RevealGroup>
-      </div>
+    <section
+      className="border-y border-white/5 bg-onyx py-4 sm:py-0"
+      aria-label="Our promise"
+    >
+      <RevealGroup className="mx-auto grid max-w-7xl grid-cols-1 divide-y divide-white/5 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+        {promises.map(({ Icon, title, body }) => (
+          <RevealItem
+            key={title}
+            className="flex items-start gap-5 px-6 py-8 sm:px-8 sm:py-10"
+          >
+            <Icon className="mt-0.5 h-5 w-5 shrink-0 text-gold" strokeWidth={1.5} />
+            <div>
+              <h3 className="font-display text-lg text-ivory">{title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-stone">{body}</p>
+            </div>
+          </RevealItem>
+        ))}
+      </RevealGroup>
     </section>
   );
 }

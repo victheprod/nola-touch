@@ -1,50 +1,73 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { RevealGroup, RevealItem } from "@/components/motion/reveal";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
+import { Reveal } from "@/components/motion/reveal";
+import { educationImage } from "@/data/images";
 import { guides } from "@/data/guides";
 
 export function Education() {
-  return (
-    <section className="py-20 sm:py-28" aria-labelledby="education-heading">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
-          <SectionHeading
-            eyebrow="Hair Guides"
-            title="Know before you buy"
-            description="Straightforward guides written to help you pick the right product the first time."
-            id="education-heading"
-          />
-          <Link
-            href="/learn"
-            className="shrink-0 text-sm font-medium uppercase tracking-[0.12em] text-onyx underline-offset-4 hover:underline"
-          >
-            All guides
-          </Link>
-        </div>
+  const featured = guides[0];
 
-        <RevealGroup className="mt-12 grid gap-5 md:grid-cols-3">
-          {guides.map((g) => (
-            <RevealItem key={g.slug}>
-              <Link
-                href={`/learn/${g.slug}`}
-                className="group relative flex h-full flex-col overflow-hidden border border-border bg-ivory p-8 transition-colors hover:border-gold-deep/50"
-              >
-                <span className="eyebrow text-gold-deep">{g.kicker}</span>
-                <h3 className="mt-4 font-display text-2xl leading-snug text-onyx">
-                  {g.title}
-                </h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
-                  {g.excerpt}
-                </p>
-                <span className="mt-6 inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.12em] text-onyx">
-                  {g.readTime}
-                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </span>
-              </Link>
-            </RevealItem>
-          ))}
-        </RevealGroup>
+  return (
+    <section className="bg-onyx py-20 text-ivory sm:py-28" aria-labelledby="education-heading">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
+          <Reveal className="relative overflow-hidden bg-[#111]">
+            <div className="relative aspect-[4/5]">
+              <Image
+                src={educationImage.src}
+                alt={educationImage.alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 40vw"
+              />
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <p className="eyebrow text-gold">Hair Guide</p>
+            <h2
+              id="education-heading"
+              className="mt-4 font-display text-[2.25rem] leading-[1.08] tracking-[-0.01em] sm:text-4xl lg:text-5xl"
+            >
+              Know before
+              <br />
+              <span className="italic text-gold">you buy</span>
+            </h2>
+
+            <div className="mt-10 space-y-8">
+              {guides.map((g, i) => (
+                <div
+                  key={g.slug}
+                  className="flex gap-6 border-b border-white/5 pb-8 last:border-0 last:pb-0"
+                >
+                  <span className="mt-0.5 shrink-0 font-display text-sm italic text-gold">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h3 className="font-display text-lg text-ivory">{g.title}</h3>
+                    <p className="mt-2 text-sm leading-[1.8] text-stone">{g.excerpt}</p>
+                    <Link
+                      href={`/learn/${g.slug}`}
+                      className="mt-3 inline-flex items-center gap-1.5 text-[0.65rem] font-medium uppercase tracking-[0.16em] text-gold transition-colors hover:text-ivory"
+                    >
+                      Read guide
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <Link
+              href={`/learn/${featured.slug}`}
+              className="group mt-10 inline-flex items-center gap-2.5 text-[0.7rem] font-medium uppercase tracking-[0.2em] text-ivory transition-colors hover:text-gold"
+            >
+              Full hair guide
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

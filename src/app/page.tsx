@@ -1,5 +1,5 @@
 import { Hero } from "@/components/home/hero";
-import { ValueProps } from "@/components/home/value-props";
+import { CategoryTicker } from "@/components/home/category-ticker";
 import { FeaturedCollections } from "@/components/home/featured-collections";
 import { ProductRail } from "@/components/home/product-rail";
 import { BrandPromise } from "@/components/home/brand-promise";
@@ -12,23 +12,25 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <ValueProps />
+      <CategoryTicker />
       <FeaturedCollections />
       <ProductRail
-        eyebrow="Top Picks"
+        eyebrow="Most Loved"
         title="Best sellers"
         description="The products our customers reorder again and again."
         products={bestSellers}
         viewAllHref="/shop/best-sellers"
+        tone="dark"
       />
+      <BrandPromise />
       <ProductRail
-        eyebrow="Just Dropped"
+        eyebrow="Just In"
         title="New arrivals"
         description="Fresh textures, lengths, and brands added this week."
         products={newArrivals}
         viewAllHref="/shop/new"
+        tone="dark"
       />
-      <BrandPromise />
       <Education />
       <ReviewsSection />
       <Newsletter />
