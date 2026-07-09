@@ -36,7 +36,13 @@ export function TextureSwatch({
 }
 
 function strand(color: string, opacity = 0.9) {
-  return { stroke: color, strokeWidth: 2.2, fill: "none", strokeLinecap: "round", opacity };
+  return {
+    stroke: color,
+    strokeWidth: 2.2,
+    fill: "none" as const,
+    strokeLinecap: "round" as const,
+    opacity,
+  };
 }
 
 const gold = "#d4a853";
