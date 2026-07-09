@@ -40,8 +40,9 @@ export function Footer() {
           <div className="lg:col-span-4">
             <BrandStacked variant="gold" size="md" />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-stone">
-              Wigs, bundles, hair care, styling products, and accessories for
-              Black women — shipped fast from San Antonio, Texas.
+              Beauty, right when you need it. Wigs, bundles, hair care, and
+              essentials for students — pickup near UTSA &amp; shipped from San
+              Antonio, Texas.
             </p>
             <p className="mt-4 text-sm text-stone">
               <a
