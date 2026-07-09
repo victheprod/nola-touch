@@ -2,10 +2,8 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 /**
- * LogoMark — intertwined ribbon "N" icon (sculptural continuity).
- * A fluid, knotted N: left arch, top-right peak, and a central loop the
- * diagonal threads through. Uses currentColor so it adapts to gold/onyx/ivory.
- * Used as favicon, product surfaces, and optional lockup accent.
+ * LogoMark — client icon as transparent SVG.
+ * Ribbon-like N with central oval loop. Uses currentColor for ivory/gold/onyx.
  */
 export function LogoMark({ className }: { className?: string }) {
   return (
@@ -16,16 +14,25 @@ export function LogoMark({ className }: { className?: string }) {
       className={cn("h-8 w-8", className)}
     >
       <path
-        d="M 12 50 C 10 37, 11 19, 22 14 C 30 10, 35 15, 35 24 C 36 34, 45 44, 50 50 C 53 53, 57 47, 52 44"
+        d="M11 49 C9 36, 10 17, 22 12 C31 8, 36 14, 36 24 C37 34, 44 43, 51 49"
         stroke="currentColor"
-        strokeWidth="4.6"
+        strokeWidth="5.2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <path
-        d="M 31 30 C 32 20, 39 12, 46 14 C 53 16, 50 31, 45 38 C 41 45, 30 48, 28 40 C 26 33, 34 32, 33 29"
+      <ellipse
+        cx="32"
+        cy="31"
+        rx="7.5"
+        ry="10.5"
+        transform="rotate(-22 32 31)"
         stroke="currentColor"
-        strokeWidth="4.6"
+        strokeWidth="4.8"
+      />
+      <path
+        d="M30 29 C31 19, 38 11, 46 13 C53 15, 51 30, 46 37 C42 44, 31 47, 29 39 C27 32, 35 31, 34 28"
+        stroke="currentColor"
+        strokeWidth="5.2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -37,14 +44,17 @@ type LogoProps = {
   className?: string;
   showTagline?: boolean;
   showMark?: boolean;
-  variant?: "onyx" | "ivory";
+  variant?: "onyx" | "ivory" | "gold";
   href?: string | null;
 };
 
-/**
- * Logo — Figma / brand-sheet lockup:
- * large serif NOLA, small tracked TOUCH beneath.
- */
+const variantColor = {
+  onyx: "text-onyx",
+  ivory: "text-ivory",
+  gold: "text-gold",
+};
+
+/** Legacy text lockup — prefer PrimaryLogo / StackedLogo for brand moments. */
 export function Logo({
   className,
   showTagline = true,
@@ -52,15 +62,11 @@ export function Logo({
   variant = "onyx",
   href = "/",
 }: LogoProps) {
-  const color = variant === "ivory" ? "text-ivory" : "text-onyx";
-
   const content = (
-    <span className={cn("inline-flex items-center gap-2.5", color, className)}>
+    <span className={cn("inline-flex items-center gap-2.5", variantColor[variant], className)}>
       {showMark && <LogoMark className="h-7 w-7 shrink-0" />}
       <span className="flex flex-col leading-none">
-        <span className="wordmark text-[1.35rem] tracking-[0.08em] sm:text-[1.5rem]">
-          NOLA
-        </span>
+        <span className="wordmark text-[1.35rem] tracking-[0.08em] sm:text-[1.5rem]">NOLA</span>
         {showTagline && (
           <span className="mt-1 text-[0.48rem] font-medium uppercase tracking-[0.55em] text-current/75">
             Touch
@@ -71,7 +77,6 @@ export function Logo({
   );
 
   if (href === null) return content;
-
   return (
     <Link href={href} aria-label="Nola Touch — home" className="inline-flex">
       {content}
