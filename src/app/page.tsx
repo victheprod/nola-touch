@@ -1,5 +1,6 @@
 import { Hero } from "@/components/home/hero";
 import { TrustBar } from "@/components/home/trust-bar";
+import { EditorialDivider } from "@/components/home/editorial-divider";
 import { FeaturedCollections } from "@/components/home/featured-collections";
 import { ProductRail } from "@/components/home/product-rail";
 import { Education } from "@/components/home/education";
@@ -13,6 +14,7 @@ export default function HomePage() {
       <Hero />
       <TrustBar />
       <FeaturedCollections />
+      <EditorialDivider tone="champagne" />
       <ProductRail
         eyebrow="Best sellers"
         title="Most ordered right now"
@@ -21,6 +23,7 @@ export default function HomePage() {
         viewAllHref="/shop/best-sellers"
         tone="dark"
       />
+      <EditorialDivider tone="onyx" />
       <ProductRail
         eyebrow="New arrivals"
         title="Just added this week"

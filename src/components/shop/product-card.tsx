@@ -2,14 +2,17 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 import { Eye, ShoppingBag } from "lucide-react";
+import { motion } from "framer-motion";
 import { cn, formatPrice } from "@/lib/utils";
 import type { Product } from "@/data/catalog";
-import { productImages } from "@/data/images";
+import { productImages, productImageHover } from "@/data/images";
 import { useCart } from "@/lib/cart/cart-context";
 import { Badge } from "@/components/ui/badge";
 import { StarRating } from "@/components/ui/star-rating";
 import { ProductSurface } from "@/components/shop/product-surface";
+import { easeLux } from "@/lib/motion";
 
 const badgeVariant = {
   "Best Seller": "gold",
@@ -32,8 +35,10 @@ export function ProductCard({
   tone?: "light" | "dark";
 }) {
   const { addItem } = useCart();
+  const [hovered, setHovered] = useState(false);
   const dark = tone === "dark";
   const image = productImages[product.slug];
+  const hoverImage = productImageHover[product.slug];
   const onSale = product.compareAt && product.compareAt > product.price;
 
   function quickAdd(e: React.MouseEvent) {
@@ -49,8 +54,12 @@ export function ProductCard({
   }
 
   return (
-    <article className={cn("product-card group flex flex-col", className)}>
-      <div className="relative overflow-hidden bg-[#111] ring-1 ring-transparent transition-[box-shadow,ring-color] duration-300 group-hover:shadow-[0_20px_48px_rgba(0,0,0,0.22)] group-hover:ring-gold/25">
+    <article
+      className={cn("product-card group flex flex-col", className)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className="relative overflow-hidden bg-[#111] ring-1 ring-transparent transition-[box-shadow,ring-color] duration-500 group-hover:shadow-[0_20px_48px_rgba(0,0,0,0.22)] group-hover:ring-gold/25">
         <Link href={`/products/${product.slug}`} className="relative block">
           {image ? (
             <div className="relative aspect-[3/4] overflow-hidden">
@@ -58,8 +67,29 @@ export function ProductCard({
                 src={image.src}
                 alt={image.alt}
                 fill
-                className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                className={cn(
+                  "object-cover transition-opacity duration-700",
+                  hovered && hoverImage ? "opacity-0" : "opacity-100",
+                )}
+                style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
                 sizes="(max-width: 640px) 50vw, 25vw"
+              />
+              {hoverImage && (
+                <Image
+                  src={hoverImage.src}
+                  alt={hoverImage.alt}
+                  fill
+                  className={cn(
+                    "object-cover transition-opacity duration-700",
+                    hovered ? "opacity-100" : "opacity-0",
+                  )}
+                  style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+                  sizes="(max-width: 640px) 50vw, 25vw"
+                />
+              )}
+              <motion.div
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-onyx/25 via-transparent to-transparent opacity-0 group-hover:opacity-100"
+                transition={{ duration: 0.5, ease: easeLux }}
               />
             </div>
           ) : (
@@ -81,10 +111,10 @@ export function ProductCard({
           )}
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 z-10 flex translate-y-0 gap-px sm:translate-y-full sm:transition-transform sm:duration-300 sm:ease-out sm:group-hover:translate-y-0 sm:group-focus-within:translate-y-0">
+        <div className="absolute bottom-0 left-0 right-0 z-10 flex translate-y-0 gap-px sm:translate-y-full sm:transition-transform sm:duration-500 sm:ease-[cubic-bezier(0.16,1,0.3,1)] sm:group-hover:translate-y-0 sm:group-focus-within:translate-y-0">
           <Link
             href={`/products/${product.slug}`}
-            className="flex flex-1 items-center justify-center gap-1.5 bg-ivory/95 py-3 text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-onyx backdrop-blur-sm transition-colors hover:bg-ivory sm:text-[0.625rem]"
+            className="glass-cta flex flex-1 items-center justify-center gap-1.5 py-3 text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-onyx transition-colors hover:bg-ivory sm:text-[0.625rem]"
           >
             <Eye className="h-3.5 w-3.5" strokeWidth={1.5} />
             Quick view

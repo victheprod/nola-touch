@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BrandMark } from "@/components/brand/brand-mark";
@@ -12,10 +12,14 @@ import { heroImage } from "@/data/images";
 
 export function Hero() {
   const mounted = useMounted();
+  const { scrollY } = useScroll();
+  const imageY = useTransform(scrollY, [0, 600], [0, 72]);
+  const imageScale = useTransform(scrollY, [0, 600], [1, 1.06]);
+  const contentOpacity = useTransform(scrollY, [0, 420], [1, 0.72]);
 
   return (
     <section className="relative min-h-[85vh] overflow-hidden bg-onyx text-ivory sm:min-h-[88vh]">
-      <div className="absolute inset-0">
+      <motion.div className="absolute inset-0" style={{ y: imageY, scale: imageScale }}>
         <Image
           src={heroImage.src}
           alt={heroImage.alt}
@@ -29,15 +33,18 @@ export function Hero() {
           className="pointer-events-none absolute -left-1/4 top-1/3 h-[28rem] w-[28rem] rounded-full bg-gold/10 blur-3xl"
           aria-hidden="true"
         />
-      </div>
+      </motion.div>
 
       <BrandMark
         asset="icon"
         variant="gold"
-        className="pointer-events-none absolute -right-6 top-14 h-44 w-44 opacity-[0.08] sm:top-16 sm:h-56 sm:w-56 lg:h-72 lg:w-72"
+        className="pointer-events-none absolute -right-6 top-14 z-[1] h-44 w-44 opacity-[0.06] sm:top-16 sm:h-56 sm:w-56 lg:h-72 lg:w-72"
       />
 
-      <div className="relative z-10 mx-auto flex min-h-[85vh] max-w-7xl flex-col justify-center px-4 py-20 sm:min-h-[88vh] sm:px-6 sm:py-24 lg:px-8">
+      <motion.div
+        style={{ opacity: contentOpacity }}
+        className="relative z-10 mx-auto flex min-h-[85vh] max-w-7xl flex-col justify-center px-4 py-20 sm:min-h-[88vh] sm:px-6 sm:py-24 lg:px-8"
+      >
         <motion.div
           variants={staggerContainer}
           initial={mounted ? "hidden" : false}
@@ -76,7 +83,7 @@ export function Hero() {
             </Button>
           </motion.div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

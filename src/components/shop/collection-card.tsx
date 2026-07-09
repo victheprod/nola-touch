@@ -44,17 +44,19 @@ export function CollectionCard({
           <div className="card-overlay absolute inset-0" />
         </div>
         <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-          <p className="text-[0.6rem] font-medium uppercase tracking-[0.12em] text-gold">
-            {collection.productCount}+ products
-          </p>
-          <h3 className="mt-1 font-display text-lg leading-tight text-ivory sm:text-xl">
-            {collection.name}
-          </h3>
-          <p className="mt-1 line-clamp-1 text-xs text-stone">{collection.tagline}</p>
-          <span className="mt-3 inline-flex items-center gap-1 text-[0.65rem] font-medium uppercase tracking-[0.12em] text-ivory/80 transition-colors group-hover:text-gold">
-            Shop
-            <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
-          </span>
+          <div className="glass-panel translate-y-1 p-4 transition-transform duration-500 group-hover:translate-y-0 sm:p-5">
+            <p className="text-[0.6rem] font-medium uppercase tracking-[0.12em] text-gold">
+              {collection.productCount}+ products
+            </p>
+            <h3 className="mt-1 font-display text-lg leading-tight text-ivory sm:text-xl">
+              {collection.name}
+            </h3>
+            <p className="mt-1 line-clamp-1 text-xs text-stone">{collection.tagline}</p>
+            <span className="mt-3 inline-flex items-center gap-1 text-[0.65rem] font-medium uppercase tracking-[0.12em] text-ivory/80 transition-colors group-hover:text-gold">
+              Shop
+              <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+            </span>
+          </div>
         </div>
       </Link>
     );

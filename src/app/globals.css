@@ -226,6 +226,44 @@ body {
   }
 }
 
+/* Glass morphism accents — sparing, editorial */
+.glass-chip {
+  border: 1px solid color-mix(in srgb, var(--gold) 22%, transparent);
+  background: color-mix(in srgb, var(--ivory) 55%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.glass-cta {
+  border-top: 1px solid color-mix(in srgb, var(--ivory) 35%, transparent);
+  background: color-mix(in srgb, var(--ivory) 82%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.glass-panel {
+  border: 1px solid color-mix(in srgb, var(--ivory) 18%, transparent);
+  background: color-mix(in srgb, var(--onyx) 72%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Marquee edge fade */
+.marquee-fade {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+}
+
 /* Product surface gradients (placeholders until photography) */
 .surface-onyx {
   background:

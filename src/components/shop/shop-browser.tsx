@@ -88,7 +88,7 @@ export function ShopBrowser({
         </div>
       </div>
 
-      <ProductGrid key={`${active}-${sort}`} products={filtered} />
+      <ProductGrid products={filtered} />
     </div>
   );
 }

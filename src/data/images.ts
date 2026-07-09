@@ -87,6 +87,72 @@ export const productImages: Record<string, { src: string; alt: string }> = {
   },
 };
 
+/** Alternate crop for luxury hover crossfade on product cards. */
+export const productImageHover: Record<string, { src: string; alt: string }> = {
+  "hd-lace-body-wave-22": {
+    src: "https://images.unsplash.com/photo-1589156191108-c762ff4b96ab?w=600&h=780&fit=crop&auto=format&crop=faces,entropy",
+    alt: "Lace frontal wig detail",
+  },
+  "glueless-kinky-curly-18": {
+    src: "https://images.unsplash.com/photo-1522390108011-5f8667fd551d?w=600&h=780&fit=crop&auto=format&crop=top",
+    alt: "Curly wig texture close-up",
+  },
+  "deep-wave-frontal-26": {
+    src: "https://images.unsplash.com/photo-1636302925868-52075f44d810?w=600&h=780&fit=crop&auto=format&crop=center",
+    alt: "Deep wave hair texture",
+  },
+  "brazilian-body-wave-set": {
+    src: "https://images.unsplash.com/photo-1527203561188-dae1bc1a417f?w=600&h=780&fit=crop&auto=format&crop=faces",
+    alt: "Body wave hairstyle profile",
+  },
+  "raw-cambodian-straight-20": {
+    src: "https://images.unsplash.com/photo-1709672262859-68cb9b39ae4f?w=600&h=780&fit=crop&auto=format&crop=entropy",
+    alt: "Straight hair length detail",
+  },
+  "melanin-leave-in": {
+    src: "https://images.unsplash.com/photo-1779556507342-7951f64a3b86?w=600&h=780&fit=crop&auto=format&crop=product",
+    alt: "Leave-in conditioner bottle",
+  },
+  "mielle-rosemary-mint-oil": {
+    src: "https://images.unsplash.com/photo-1650529192647-ce4eb5fb3314?w=600&h=780&fit=crop&auto=format&crop=center",
+    alt: "Rosemary mint oil bottles",
+  },
+  "style-factor-edge-control": {
+    src: "https://images.unsplash.com/photo-1633793566189-8e9fe6f817fc?w=600&h=780&fit=crop&auto=format&crop=edges",
+    alt: "Edge control jar detail",
+  },
+  "eco-styler-olive-oil": {
+    src: "https://images.unsplash.com/photo-1632765866070-3fadf25d3d5b?w=600&h=780&fit=crop&auto=format&crop=top",
+    alt: "Styling gel application",
+  },
+  "curl-defining-mousse": {
+    src: "https://images.unsplash.com/photo-1772987714654-2df39af2c658?w=600&h=780&fit=crop&auto=format&crop=product",
+    alt: "Curl mousse products",
+  },
+  "double-layer-satin-bonnet": {
+    src: "https://images.unsplash.com/photo-1593351799227-75df2026356b?w=600&h=780&fit=crop&auto=format&crop=center",
+    alt: "Satin bonnet detail",
+  },
+  "mink-lashes-wispy": {
+    src: "https://images.unsplash.com/photo-1583147610149-78ac5cb5a303?w=600&h=780&fit=crop&auto=format&crop=faces",
+    alt: "Lash and beauty accessories",
+  },
+};
+
+export function productGalleryViews(slug: string, primary?: { src: string; alt: string }) {
+  if (!primary) return [];
+  const hover = productImageHover[slug];
+  const views = [
+    primary,
+    hover ?? { ...primary, src: `${primary.src}&sat=-10` },
+    { ...primary, src: primary.src.replace("w=600", "w=620").replace("h=780", "h=800") },
+    hover
+      ? { ...hover, src: hover.src.replace("w=600", "w=580") }
+      : { ...primary, src: `${primary.src}&blur=0` },
+  ];
+  return views;
+}
+
 export const reviewAvatars: Record<string, string> = {
   "rev-1": "https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=80&h=80&fit=crop&auto=format",
   "rev-2": "https://images.unsplash.com/photo-1632765854612-9b02b6ec2b15?w=80&h=80&fit=crop&auto=format",

@@ -93,7 +93,11 @@ export default async function ProductPage({
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
           <div className="lg:sticky lg:top-28 lg:self-start">
-            <ProductGallery surface={product.surface} badge={product.badge} />
+            <ProductGallery
+              surface={product.surface}
+              badge={product.badge}
+              slug={product.slug}
+            />
           </div>
 
           <div className="flex flex-col">

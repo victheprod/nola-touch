@@ -3,6 +3,7 @@ import { Playfair_Display, Inter } from "next/font/google";
 import { Providers } from "./providers";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { FloatingShopCta } from "@/components/layout/floating-shop-cta";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -58,6 +59,7 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           <main className="flex-1">{children}</main>
+          <FloatingShopCta />
           <Footer />
         </Providers>
       </body>

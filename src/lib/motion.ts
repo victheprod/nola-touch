@@ -41,3 +41,31 @@ export const staggerContainer: Variants = {
 
 // Viewport config for scroll-reveal — reveal once, slightly before fully in view.
 export const revealViewport = { once: true, margin: "-80px" } as const;
+
+export const crossfade: Variants = {
+  enter: { opacity: 0, scale: 1.02 },
+  center: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.55, ease: easeLux },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.98,
+    transition: { duration: 0.4, ease: easeSoft },
+  },
+};
+
+export const gridItem: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: easeLux },
+  },
+  exit: {
+    opacity: 0,
+    y: -8,
+    transition: { duration: 0.25, ease: easeSoft },
+  },
+};

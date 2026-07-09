@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Search, User, ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BrandIcon } from "@/components/brand/brand-logo";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { useCart } from "@/lib/cart/cart-context";
+import { easeLux } from "@/lib/motion";
 
 const navLinks = [
   { label: "Extensions", href: "/shop/extensions" },
@@ -101,11 +103,20 @@ export function Navbar() {
               className="relative flex h-10 w-10 items-center justify-center text-ivory transition-colors hover:text-gold cursor-pointer"
             >
               <ShoppingBag className="h-[1.1rem] w-[1.1rem]" strokeWidth={1.5} />
-              {count > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-gold px-1 text-[0.55rem] font-bold text-onyx">
-                  {count}
-                </span>
-              )}
+              <AnimatePresence mode="popLayout">
+                {count > 0 && (
+                  <motion.span
+                    key={count}
+                    initial={{ scale: 0.4, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.4, opacity: 0 }}
+                    transition={{ duration: 0.35, ease: easeLux }}
+                    className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-gold px-1 text-[0.55rem] font-bold text-onyx"
+                  >
+                    {count}
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </button>
           </div>
         </div>
