@@ -18,7 +18,7 @@ export function Newsletter() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-onyx pb-20 pt-14 text-ivory sm:pb-24 sm:pt-20">
+    <section id="newsletter" className="relative overflow-hidden bg-onyx pb-20 pt-14 text-ivory sm:pb-24 sm:pt-20">
       <Ribbon tone="gold" animated={false} className="opacity-[0.2]" />
       <div className="story-glow-gold pointer-events-none absolute inset-x-0 top-0 h-56" aria-hidden />
 
