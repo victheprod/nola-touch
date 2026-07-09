@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { LogoMark } from "@/components/brand/logo";
 
 const ASSETS = {
-  icon: "/images/brand/icon.png",
   primary: "/images/brand/primary-logo.png",
   stacked: "/images/brand/stacked-logo.png",
 } as const;
@@ -13,23 +13,16 @@ type BrandLogoProps = {
   href?: string | null;
 };
 
-/** Icon-only mark — for header navigation on dark backgrounds. */
+/** Icon-only mark — SVG on dark nav (client PNG has opaque paper bg). */
 export function BrandIcon({ className, href = "/" }: BrandLogoProps) {
-  const img = (
-    <Image
-      src={ASSETS.icon}
-      alt="Nola Touch"
-      width={120}
-      height={120}
-      className={cn("h-9 w-9 object-contain brightness-0 invert sm:h-10 sm:w-10", className)}
-      priority
-    />
+  const mark = (
+    <LogoMark className={cn("h-9 w-9 text-ivory sm:h-10 sm:w-10", className)} />
   );
 
-  if (href === null) return img;
+  if (href === null) return mark;
   return (
     <Link href={href} aria-label="Nola Touch — home" className="inline-flex shrink-0">
-      {img}
+      {mark}
     </Link>
   );
 }
