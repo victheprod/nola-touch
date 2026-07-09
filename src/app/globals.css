@@ -438,6 +438,17 @@ body {
 .match-guide-chain {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
 }
+
+/* Splash screen */
+.splash-screen {
+  isolation: isolate;
+}
+.splash-ring-dashed {
+  border: 1px dashed rgba(252, 215, 107, 0.35);
+}
+.splash-curtain {
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.5);
+}
 .field-label {
   display: block;
   font-size: 0.58rem;
