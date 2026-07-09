@@ -7,13 +7,12 @@ import type { QuestionLayout, QuestionOption } from "@/lib/beauty-match/question
 import {
   lookGoalImages,
   shoppingGoalImages,
-  textureSwatches,
 } from "@/data/guide-images";
+import { TextureSwatch } from "@/components/beauty-match/texture-swatch";
 
 function optionImage(stepId: string, optId: string) {
   if (stepId === "shoppingGoal") return shoppingGoalImages[optId];
   if (stepId === "lookGoal") return lookGoalImages[optId];
-  if (stepId === "texture") return textureSwatches[optId];
   return undefined;
 }
 
@@ -129,9 +128,8 @@ export function ChoiceSelector({
   if (layout === "swatch-grid") {
     return (
       <>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-3 gap-3 sm:gap-4">
           {main.map((opt) => {
-            const img = optionImage(stepId, opt.id);
             const selected = value === opt.id;
             return (
               <button
@@ -139,14 +137,21 @@ export function ChoiceSelector({
                 type="button"
                 onClick={() => onChange(opt.id)}
                 className={cn(
-                  "group flex flex-col items-center gap-2 rounded-xl p-2 transition-all cursor-pointer",
+                  "group flex flex-col items-center gap-2.5 rounded-xl p-2 transition-all cursor-pointer",
                   selected ? "bg-gold/15 ring-1 ring-gold" : "hover:bg-white/5",
                 )}
               >
-                <div className="relative h-16 w-16 overflow-hidden rounded-full border border-white/15">
-                  {img && <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="64px" />}
-                </div>
-                <span className={cn("text-center text-[0.65rem] leading-tight", selected ? "text-gold" : "text-stone")}>
+                <TextureSwatch
+                  id={opt.id}
+                  selected={selected}
+                  className="h-[4.5rem] w-[4.5rem] sm:h-20 sm:w-20"
+                />
+                <span
+                  className={cn(
+                    "text-center text-[0.65rem] leading-tight",
+                    selected ? "text-gold" : "text-stone",
+                  )}
+                >
                   {opt.label}
                 </span>
               </button>
