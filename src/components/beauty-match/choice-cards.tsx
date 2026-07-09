@@ -1,15 +1,32 @@
 "use client";
 
+import Image from "next/image";
+import { Check, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { QuestionOption } from "@/lib/beauty-match/questions";
-import { Check } from "lucide-react";
+import type { QuestionLayout, QuestionOption } from "@/lib/beauty-match/questions";
+import {
+  lookGoalImages,
+  shoppingGoalImages,
+  textureSwatches,
+} from "@/data/guide-images";
 
-export function ChoiceCards({
+function optionImage(stepId: string, optId: string) {
+  if (stepId === "shoppingGoal") return shoppingGoalImages[optId];
+  if (stepId === "lookGoal") return lookGoalImages[optId];
+  if (stepId === "texture") return textureSwatches[optId];
+  return undefined;
+}
+
+export function ChoiceSelector({
+  layout,
+  stepId,
   options,
   value,
   onChange,
   unsureId = "unsure",
 }: {
+  layout: QuestionLayout;
+  stepId: string;
   options: QuestionOption[];
   value: string;
   onChange: (id: string) => void;
@@ -18,9 +35,133 @@ export function ChoiceCards({
   const main = options.filter((o) => o.id !== unsureId);
   const unsure = options.find((o) => o.id === unsureId);
 
+  if (layout === "image-grid") {
+    return (
+      <>
+        <div className="grid grid-cols-2 gap-2.5">
+          {main.map((opt) => {
+            const img = optionImage(stepId, opt.id);
+            const selected = value === opt.id;
+            return (
+              <button
+                key={opt.id}
+                type="button"
+                onClick={() => onChange(opt.id)}
+                className={cn(
+                  "group relative aspect-[4/5] overflow-hidden rounded-xl text-left transition-all duration-300 cursor-pointer",
+                  selected && "ring-2 ring-gold ring-offset-2 ring-offset-[#0a0a0b]",
+                )}
+              >
+                {img ? (
+                  <Image src={img.src} alt={img.alt} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="200px" />
+                ) : (
+                  <div className="surface-onyx h-full w-full" />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-3">
+                  <p className="font-display text-sm leading-tight text-ivory">{opt.label}</p>
+                  {opt.description && (
+                    <p className="mt-0.5 text-[0.65rem] text-stone">{opt.description}</p>
+                  )}
+                </div>
+                {selected && (
+                  <span className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-gold text-onyx">
+                    <Check className="h-3.5 w-3.5" strokeWidth={2.5} />
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+        {unsure && <UnsureLink label={unsure.label} selected={value === unsure.id} onClick={() => onChange(unsure.id)} />}
+      </>
+    );
+  }
+
+  if (layout === "vibe-grid") {
+    return (
+      <>
+        <div className="grid grid-cols-2 gap-2.5">
+          {main.map((opt) => {
+            const img = optionImage(stepId, opt.id);
+            const selected = value === opt.id;
+            return (
+              <button
+                key={opt.id}
+                type="button"
+                onClick={() => onChange(opt.id)}
+                className={cn(
+                  "group relative aspect-[3/4] overflow-hidden rounded-2xl text-left cursor-pointer",
+                  selected && "ring-2 ring-gold ring-offset-2 ring-offset-[#0a0a0b]",
+                )}
+              >
+                {img && (
+                  <Image src={img.src} alt={img.alt} fill className="object-cover object-top transition-transform duration-500 group-hover:scale-105" sizes="200px" />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                <p className="absolute inset-x-0 bottom-0 p-3 font-display text-sm text-ivory">{opt.label}</p>
+                {selected && (
+                  <span className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-gold text-onyx">
+                    <Check className="h-3.5 w-3.5" />
+                  </span>
+                )}
+              </button>
+            );
+          })}
+          {unsure && (
+            <button
+              type="button"
+              onClick={() => onChange(unsure.id)}
+              className={cn(
+                "flex aspect-[3/4] flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-white/25 text-stone transition-colors hover:border-gold/50 hover:text-ivory cursor-pointer",
+                value === unsure.id && "border-gold bg-gold/10 text-gold",
+              )}
+            >
+              <Plus className="h-6 w-6" strokeWidth={1.5} />
+              <span className="text-xs">{unsure.label}</span>
+            </button>
+          )}
+        </div>
+      </>
+    );
+  }
+
+  if (layout === "swatch-grid") {
+    return (
+      <>
+        <div className="grid grid-cols-3 gap-2">
+          {main.map((opt) => {
+            const img = optionImage(stepId, opt.id);
+            const selected = value === opt.id;
+            return (
+              <button
+                key={opt.id}
+                type="button"
+                onClick={() => onChange(opt.id)}
+                className={cn(
+                  "group flex flex-col items-center gap-2 rounded-xl p-2 transition-all cursor-pointer",
+                  selected ? "bg-gold/15 ring-1 ring-gold" : "hover:bg-white/5",
+                )}
+              >
+                <div className="relative h-16 w-16 overflow-hidden rounded-full border border-white/15">
+                  {img && <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="64px" />}
+                </div>
+                <span className={cn("text-center text-[0.65rem] leading-tight", selected ? "text-gold" : "text-stone")}>
+                  {opt.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+        {unsure && <UnsureLink label={unsure.label} selected={value === unsure.id} onClick={() => onChange(unsure.id)} />}
+      </>
+    );
+  }
+
+  // pill-list
   return (
-    <div className="space-y-2.5">
-      <div className="grid gap-2 sm:grid-cols-2">
+    <>
+      <div className="space-y-2">
         {main.map((opt) => {
           const selected = value === opt.id;
           return (
@@ -29,48 +170,28 @@ export function ChoiceCards({
               type="button"
               onClick={() => onChange(opt.id)}
               className={cn(
-                "group relative flex flex-col items-start border px-4 py-3.5 text-left transition-all duration-300 cursor-pointer",
+                "flex w-full items-center justify-between rounded-full border px-5 py-3.5 text-left transition-all duration-300 cursor-pointer",
                 selected
-                  ? "border-gold-deep bg-champagne/80 shadow-[0_8px_24px_rgba(0,0,0,0.06)]"
-                  : "border-stone-line bg-ivory hover:border-charcoal/40 hover:bg-champagne/40",
+                  ? "border-gold bg-gold/10 text-ivory"
+                  : "border-white/15 text-stone hover:border-white/30 hover:text-ivory",
               )}
             >
+              <span className="text-sm font-medium">{opt.label}</span>
               {selected && (
-                <span className="absolute right-3 top-3 flex h-5 w-5 items-center justify-center bg-gold text-onyx">
-                  <Check className="h-3 w-3" strokeWidth={2.5} />
-                </span>
-              )}
-              <span className="font-display text-[0.95rem] leading-snug text-onyx pr-6">
-                {opt.label}
-              </span>
-              {opt.description && (
-                <span className="mt-1 text-xs leading-relaxed text-muted">
-                  {opt.description}
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gold text-onyx">
+                  <Check className="h-3.5 w-3.5" strokeWidth={2.5} />
                 </span>
               )}
             </button>
           );
         })}
       </div>
-      {unsure && (
-        <button
-          type="button"
-          onClick={() => onChange(unsure.id)}
-          className={cn(
-            "w-full border px-4 py-2.5 text-center text-xs font-medium uppercase tracking-[0.12em] transition-colors cursor-pointer",
-            value === unsure.id
-              ? "border-gold-deep bg-gold/15 text-onyx"
-              : "border-dashed border-stone-line text-muted hover:border-charcoal/30 hover:text-charcoal",
-          )}
-        >
-          {unsure.label}
-        </button>
-      )}
-    </div>
+      {unsure && <UnsureLink label={unsure.label} selected={value === unsure.id} onClick={() => onChange(unsure.id)} />}
+    </>
   );
 }
 
-export function MultiChoiceCards({
+export function MultiChoiceSelector({
   options,
   values,
   onChange,
@@ -106,10 +227,10 @@ export function MultiChoiceCards({
             type="button"
             onClick={() => toggle(opt.id)}
             className={cn(
-              "border px-3.5 py-2 text-xs font-medium uppercase tracking-[0.1em] transition-all duration-300 cursor-pointer",
+              "rounded-full border px-4 py-2 text-xs font-medium transition-all cursor-pointer",
               selected
-                ? "border-onyx bg-onyx text-ivory"
-                : "border-stone-line bg-ivory text-charcoal hover:border-charcoal",
+                ? "border-gold bg-gold text-onyx"
+                : "border-white/20 text-stone hover:border-white/40 hover:text-ivory",
               opt.id === unsureId && "border-dashed",
             )}
           >
@@ -118,5 +239,28 @@ export function MultiChoiceCards({
         );
       })}
     </div>
+  );
+}
+
+function UnsureLink({
+  label,
+  selected,
+  onClick,
+}: {
+  label: string;
+  selected: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "mt-4 w-full py-2 text-center text-xs transition-colors cursor-pointer",
+        selected ? "text-gold" : "text-stone hover:text-ivory",
+      )}
+    >
+      {label}
+    </button>
   );
 }
