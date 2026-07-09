@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
@@ -32,9 +32,20 @@ const buttonVariants = cva(
   },
 );
 
+export type ButtonVariant =
+  | "primary"
+  | "gold"
+  | "outline"
+  | "outline-ivory"
+  | "ghost"
+  | "link";
+
+export type ButtonSize = "sm" | "md" | "lg" | "icon";
+
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
   asChild?: boolean;
 }
 
