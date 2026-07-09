@@ -24,7 +24,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About Nola Touch"
         title="A beauty supply built for Black women"
-        description="The convenience of shopping online, with the curation and care of a beauty supply that actually knows textured hair."
+        description="The convenience of shopping online, with the curation and care of a beauty supply that actually knows textured hair — proudly based in San Antonio, Texas."
         tone="dark"
         crumbs={[{ label: "Home", href: "/" }, { label: "About" }]}
       />

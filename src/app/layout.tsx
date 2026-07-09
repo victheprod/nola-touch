@@ -28,9 +28,11 @@ export const metadata: Metadata = {
     template: "%s · Nola Touch",
   },
   description:
-    "Nola Touch is a digital beauty supply store for Black women — wigs, extensions, hair care, styling products, and beauty essentials. Quality brands, fast shipping, and real support.",
+    "Nola Touch is a San Antonio, Texas–based digital beauty supply for Black women — wigs, extensions, hair care, styling products, and beauty essentials. Quality brands, fast shipping, and real support.",
   keywords: [
     "beauty supply for Black women",
+    "beauty supply San Antonio",
+    "beauty supply Texas",
     "HD lace wigs",
     "human hair bundles",
     "edge control",
@@ -40,7 +42,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Nola Touch — Premium Beauty Supply for Black Women",
     description:
-      "Wigs, extensions, hair care, styling, and beauty essentials — curated for Black women.",
+      "San Antonio, Texas–based beauty supply — wigs, extensions, hair care, styling, and essentials curated for Black women.",
     type: "website",
     siteName: "Nola Touch",
   },

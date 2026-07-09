@@ -53,7 +53,7 @@ export function Hero() {
         >
           <motion.div variants={fadeUp} className="flex items-center gap-3">
             <span className="h-px w-8 bg-gold" aria-hidden="true" />
-            <p className="eyebrow text-gold">Beauty Supply · New Orleans</p>
+            <p className="eyebrow text-gold">Beauty Supply · San Antonio, Texas</p>
           </motion.div>
 
           <motion.h1

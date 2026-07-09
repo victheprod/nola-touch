@@ -41,7 +41,7 @@ export function Footer() {
             <BrandStacked variant="gold" size="md" />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-stone">
               Wigs, bundles, hair care, styling products, and accessories for
-              Black women — shipped fast from New Orleans.
+              Black women — shipped fast from San Antonio, Texas.
             </p>
             <p className="mt-4 text-sm text-stone">
               <a

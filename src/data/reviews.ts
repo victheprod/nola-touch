@@ -33,7 +33,7 @@ export const reviews: Review[] = [
   {
     id: "rev-3",
     name: "Dominique R.",
-    location: "New Orleans, LA",
+    location: "San Antonio, TX",
     rating: 5,
     product: "Melanin Haircare Leave-In",
     text: "This leave-in works on my 4C hair without crunch. I use it on wash day and between styles. Packaging was secure and it arrived faster than expected.",

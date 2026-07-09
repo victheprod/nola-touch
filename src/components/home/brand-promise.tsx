@@ -10,7 +10,7 @@ const promises = [
   {
     Icon: Truck,
     title: "Ships in 1–3 days",
-    body: "Fast, reliable shipping on every order. Free shipping on purchases over $75.",
+    body: "Fast, reliable shipping on every order from San Antonio, Texas. Free shipping on purchases over $75.",
   },
   {
     Icon: RefreshCw,
