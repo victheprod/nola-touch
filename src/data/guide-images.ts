@@ -48,8 +48,8 @@ export const lookGoalImages: Record<string, { src: string; alt: string }> = {
 
 export const textureSwatches: Record<string, { src: string; alt: string }> = {
   "kinky-coily": {
-    src: q("1522335781003-9c091ccab534", 300, 300),
-    alt: "Kinky coily texture",
+    src: q("1522390108011-5f8667fd551d", 300, 300),
+    alt: "Kinky curly texture",
   },
   curly: {
     src: q("1527203561188-dae1bc1a417f", 300, 300),

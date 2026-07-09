@@ -69,7 +69,7 @@ export function Hero() {
             className="mt-6 max-w-md text-[0.95rem] leading-relaxed text-stone sm:mt-7 sm:text-base"
           >
             Wigs, bundles, hair care, styling products, and accessories — curated
-            for Black women and shipped to your door.
+            for Black women. Shipped nationwide or pick up locally in San Antonio.
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-3 sm:mt-10">

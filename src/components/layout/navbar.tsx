@@ -37,6 +37,8 @@ export function Navbar() {
           Free shipping over $75
           <span className="mx-2 opacity-40">·</span>
           Ships in 1–3 days
+          <span className="mx-2 opacity-40">·</span>
+          San Antonio pickup
         </p>
       </div>
 
