@@ -440,6 +440,18 @@ body {
 }
 
 /* Splash screen */
+body.splash-active {
+  overflow: hidden !important;
+}
+.splash-pending {
+  visibility: hidden;
+  pointer-events: none;
+  height: 100vh;
+  overflow: hidden;
+}
+.splash-revealed {
+  visibility: visible;
+}
 .splash-screen {
   isolation: isolate;
 }
