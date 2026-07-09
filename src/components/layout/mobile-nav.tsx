@@ -6,7 +6,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { Logo } from "@/components/brand/logo";
+import { BrandPrimary } from "@/components/brand/brand-logo";
 
 const shopLinks = [
   { label: "Hair Extensions", href: "/shop/extensions" },
@@ -40,7 +40,7 @@ export function MobileNav({
         <SheetHeader>
           <SheetTitle asChild>
             <span>
-              <Logo href={null} variant="onyx" />
+              <BrandPrimary href={null} />
             </span>
           </SheetTitle>
         </SheetHeader>

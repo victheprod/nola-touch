@@ -13,17 +13,17 @@ type RibbonProps = {
 export function Ribbon({ className, tone = "gold", animated = true }: RibbonProps) {
   const stroke =
     tone === "onyx"
-      ? "rgba(11,11,12,0.10)"
+      ? "rgba(11,11,12,0.06)"
       : tone === "ivory"
-        ? "rgba(250,247,241,0.22)"
-        : "rgba(252,215,107,0.30)";
+        ? "rgba(250,247,241,0.14)"
+        : "rgba(252,215,107,0.18)";
 
   const strokeFaint =
     tone === "onyx"
-      ? "rgba(11,11,12,0.06)"
+      ? "rgba(11,11,12,0.04)"
       : tone === "ivory"
-        ? "rgba(250,247,241,0.12)"
-        : "rgba(252,215,107,0.16)";
+        ? "rgba(250,247,241,0.08)"
+        : "rgba(252,215,107,0.10)";
 
   return (
     <svg

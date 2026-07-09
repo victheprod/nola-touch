@@ -1,22 +1,17 @@
 import Link from "next/link";
-import { StackedLogo } from "@/components/brand/stacked-logo";
-import { WordmarkMarquee } from "@/components/brand/wordmark-marquee";
-import { Button } from "@/components/ui/button";
+import { BrandStacked } from "@/components/brand/brand-logo";
 import { collections } from "@/data/catalog";
 
 const help = [
-  { label: "Contact Us", href: "/contact" },
-  { label: "Shipping & Delivery", href: "/shipping" },
-  { label: "Returns & Exchanges", href: "/returns" },
-  { label: "Track Your Order", href: "/track" },
+  { label: "Contact", href: "/contact" },
+  { label: "Shipping", href: "/shipping" },
+  { label: "Returns", href: "/returns" },
   { label: "FAQ", href: "/faq" },
 ];
 
 const company = [
-  { label: "About Nola Touch", href: "/about" },
-  { label: "Hair Guides", href: "/learn" },
-  { label: "Reviews", href: "/reviews" },
-  { label: "Wholesale", href: "/wholesale" },
+  { label: "About", href: "/about" },
+  { label: "Hair guides", href: "/learn" },
 ];
 
 const socials = [
@@ -35,38 +30,29 @@ const socials = [
     href: "https://facebook.com",
     path: "M24 12a12 12 0 10-13.88 11.85v-8.38H7.08V12h3.04V9.36c0-3 1.79-4.67 4.53-4.67 1.31 0 2.68.24 2.68.24v2.95h-1.51c-1.49 0-1.95.92-1.95 1.87V12h3.32l-.53 3.47h-2.79v8.38A12 12 0 0024 12z",
   },
-  {
-    label: "YouTube",
-    href: "https://youtube.com",
-    path: "M23.5 6.51a3.02 3.02 0 00-2.12-2.14C19.5 3.86 12 3.86 12 3.86s-7.5 0-9.38.51A3.02 3.02 0 00.5 6.51 31.5 31.5 0 000 12a31.5 31.5 0 00.5 5.49 3.02 3.02 0 002.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 002.12-2.14A31.5 31.5 0 0024 12a31.5 31.5 0 00-.5-5.49zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z",
-  },
 ];
 
 export function Footer() {
   return (
-    <footer className="bg-onyx text-ivory">
-      <div className="border-b border-white/10 py-5">
-        <WordmarkMarquee tone="ivory" />
-      </div>
-
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-12">
-          {/* Brand + newsletter */}
+    <footer className="border-t border-white/10 bg-onyx text-ivory">
+      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-4">
-            <Link
-              href="/"
-              aria-label="Nola Touch — home"
-              className="inline-flex transition-opacity hover:opacity-90"
-            >
-              <StackedLogo variant="gold" size="md" />
-            </Link>
-            <p className="mt-6 max-w-xs text-sm leading-relaxed text-stone">
-              A digital beauty supply store built for Black women — wigs,
-              extensions, hair care, and everyday essentials, curated with care
-              and shipped fast.
+            <BrandStacked />
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-stone">
+              Wigs, bundles, hair care, styling products, and accessories for
+              Black women — shipped fast from New Orleans.
+            </p>
+            <p className="mt-4 text-sm text-stone">
+              <a
+                href="mailto:hello@nolatouch.com"
+                className="transition-colors hover:text-gold"
+              >
+                hello@nolatouch.com
+              </a>
             </p>
             <form
-              className="mt-6 flex max-w-sm items-center border border-white/20 focus-within:border-gold"
+              className="mt-6 flex max-w-sm border border-white/15 focus-within:border-gold"
               aria-label="Newsletter signup"
             >
               <label htmlFor="footer-email" className="sr-only">
@@ -76,24 +62,23 @@ export function Footer() {
                 id="footer-email"
                 type="email"
                 required
-                placeholder="Email address"
+                placeholder="Email for restock alerts"
                 className="h-11 flex-1 bg-transparent px-4 text-sm text-ivory placeholder:text-muted-soft focus:outline-none"
               />
               <button
                 type="submit"
-                className="h-11 px-4 text-xs font-semibold uppercase tracking-[0.12em] text-gold transition-colors hover:bg-gold hover:text-onyx cursor-pointer"
+                className="h-11 px-4 text-xs font-semibold uppercase tracking-[0.1em] text-gold transition-colors hover:bg-gold hover:text-onyx cursor-pointer"
               >
                 Join
               </button>
             </form>
           </div>
 
-          {/* Link columns */}
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-8">
             <div>
               <h3 className="eyebrow text-gold">Shop</h3>
-              <ul className="mt-5 space-y-3">
-                {collections.map((c) => (
+              <ul className="mt-4 space-y-2.5">
+                {collections.slice(0, 5).map((c) => (
                   <li key={c.slug}>
                     <Link
                       href={`/shop/${c.slug}`}
@@ -103,11 +88,19 @@ export function Footer() {
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <Link
+                    href="/shop"
+                    className="text-sm font-medium text-gold transition-colors hover:text-ivory"
+                  >
+                    All products
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
               <h3 className="eyebrow text-gold">Help</h3>
-              <ul className="mt-5 space-y-3">
+              <ul className="mt-4 space-y-2.5">
                 {help.map((l) => (
                   <li key={l.href}>
                     <Link
@@ -122,7 +115,7 @@ export function Footer() {
             </div>
             <div>
               <h3 className="eyebrow text-gold">Company</h3>
-              <ul className="mt-5 space-y-3">
+              <ul className="mt-4 space-y-2.5">
                 {company.map((l) => (
                   <li key={l.href}>
                     <Link
@@ -138,8 +131,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-6 border-t border-white/10 pt-8 sm:flex-row">
-          <div className="flex gap-3">
+        <div className="mt-12 flex flex-col items-start justify-between gap-6 border-t border-white/10 pt-8 sm:flex-row sm:items-center">
+          <div className="flex gap-2.5">
             {socials.map(({ label, href, path }) => (
               <a
                 key={label}
@@ -147,10 +140,10 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="flex h-10 w-10 items-center justify-center border border-white/15 text-stone transition-colors hover:border-gold hover:text-gold"
+                className="flex h-9 w-9 items-center justify-center border border-white/15 text-stone transition-colors hover:border-gold hover:text-gold"
               >
                 <svg
-                  className="h-4 w-4"
+                  className="h-3.5 w-3.5"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
@@ -161,17 +154,14 @@ export function Footer() {
             ))}
           </div>
 
-          <div className="flex flex-col items-center gap-2 text-xs text-muted-soft sm:flex-row sm:gap-6">
-            <p>&copy; {new Date().getFullYear()} Nola Touch. All rights reserved.</p>
-            <div className="flex gap-5">
-              <Link href="/privacy" className="transition-colors hover:text-stone">
+          <div className="flex flex-col gap-2 text-xs text-muted-soft sm:flex-row sm:items-center sm:gap-5">
+            <p>&copy; {new Date().getFullYear()} Nola Touch</p>
+            <div className="flex gap-4">
+              <Link href="/privacy" className="hover:text-stone">
                 Privacy
               </Link>
-              <Link href="/terms" className="transition-colors hover:text-stone">
+              <Link href="/terms" className="hover:text-stone">
                 Terms
-              </Link>
-              <Link href="/accessibility" className="transition-colors hover:text-stone">
-                Accessibility
               </Link>
             </div>
           </div>
